@@ -35,7 +35,7 @@ userForm.registerFormCallback = (data) => {
         console.log(response);
         if (response.success) {
             errReg.style = "display: none;";
-            errReg.textContent = errLog.element;
+            errReg.textContent = errReg.element;
             location.reload();
         } else {
             // console.error(response.error);
