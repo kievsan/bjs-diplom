@@ -1,14 +1,18 @@
 "use strict";
 
 const myServer = 'http://localhost:8000/';
+
 const userForm = new UserForm();
+
 const className = "ui message negative";
 const errLog = document
     .getElementById('login')
-    .getElementsByClassName(className)[-1];
+    .getElementsByClassName(className)[0];
+errLog.element = errLog.textContent;
 const errReg = document
     .getElementById('register')
-    .getElementsByClassName(className)[-1];
+    .getElementsByClassName(className)[0];
+errReg.element = errReg.textContent;
 
 
 userForm.loginFormCallback = (data) => {
@@ -17,7 +21,7 @@ userForm.loginFormCallback = (data) => {
         if (response.success) {
             location.reload();
         } else {
-            console.error(response.error);
+            // console.error(response.error);
             errLog.textContent = response.error;
         }
     });
@@ -29,7 +33,7 @@ userForm.registerFormCallback = (data) => {
         if (response.success) {
             location.reload();
         } else {
-            console.error(response.error);
+            // console.error(response.error);
             errReg.textContent = response.error;
         }
     });
