@@ -20,6 +20,7 @@ userForm.loginFormCallback = (data) => {
         console.log(response);
         if (response.success) {
             errLog.style = "display: none;";
+            errLog.textContent = errLog.element;
             location.reload();
         } else {
             // console.error(response.error);
@@ -33,11 +34,12 @@ userForm.registerFormCallback = (data) => {
     ApiConnector.register(data, (response) => {
         console.log(response);
         if (response.success) {
-            errLog.style = "display: none;";
+            errReg.style = "display: none;";
+            errReg.textContent = errLog.element;
             location.reload();
         } else {
             // console.error(response.error);
-            errLog.style = "display: box;";
+            errReg.style = "display: box;";
             errReg.textContent = response.error;
         }
     });
