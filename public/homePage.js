@@ -2,15 +2,10 @@
 
 // Личный кабинет пользователя
 
+// Выход из личного кабинета
 const homeExit = new LogoutButton();
-homeExit.action = (data) => {
-    ApiConnector.logout((response) => {
-        console.error(response);
-        if (response.success) {
-            location.reload();
-        }
-    })
-}
+homeExit.action = (data) => ApiConnector.logout((response) => response.success ? location.reload() : {});
 
+// Получение информации о пользователе
 ApiConnector.current((response) => response.success ? ProfileWidget.showProfile(response.data) : {});
 
