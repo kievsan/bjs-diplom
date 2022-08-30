@@ -5,26 +5,32 @@ const myServer = 'http://localhost:8000/';
 const userForm = new UserForm();
 
 const className = "ui message negative";
-const errLog = document
-    .getElementById('login')
-    .getElementsByClassName(className)[0];
-errLog.element = errLog.textContent;
-const errReg = document
-    .getElementById('register')
-    .getElementsByClassName(className)[0];
-errReg.element = errReg.textContent;
+const errLoginBox = getElement('login', className);
+const errRegBox = getElement('register', className);
 
-userForm.loginFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errLog));
-userForm.registerFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errReg));
+userForm.loginFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errLoginBox));
+userForm.registerFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errRegBox));
 
-function checkErr (response, errDisplay) {
+function checkErr (response, errDisplayBox) {
     if (response.success) {
-        errDisplay.style = "display: none;";
-        errDisplay.textContent = errDisplay.element;
+        if (errDisplayBox) {
+            errDisplayBox.style = "display: none;";
+            errDisplayBox.textContent = errDisplayBox.content;
+        }
         location.reload();
     } else {
         // console.error(response.error);
-        errDisplay.style = "display: box;";
-        errDisplay.textContent = response.error;
+        if (errDisplayBox) {
+            errDisplayBox.style = "display: box;";
+            errDisplayBox.textContent = response.error;
+        }
     }
+}
+
+function getElement (idParent, className, positionInParent = 0) {
+    const element = document
+        .getElementById(idParent)
+        .getElementsByClassName(className)[positionInParent];
+    element ? element.content = element.textContent : console.log('Заданный элемент не найден!');
+    return element;
 }
