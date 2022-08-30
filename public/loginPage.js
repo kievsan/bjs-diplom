@@ -2,12 +2,13 @@
 
 const myServer = 'http://localhost:8000/';
 const userForm = new UserForm();
+const className = "ui message negative";
 const errLog = document
     .getElementById('login')
-    .getElementsByClassName("ui message negative")[-1];
+    .getElementsByClassName(className)[-1];
 const errReg = document
     .getElementById('register')
-    .getElementsByClassName("ui message negative")[-1];
+    .getElementsByClassName(className)[-1];
 
 
 userForm.loginFormCallback = (data) => {
