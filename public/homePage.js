@@ -1,6 +1,6 @@
 "use strict";
 
-const myServer = 'http://localhost:8000/';
+// Личный кабинет пользователя
 
 const homeExit = new LogoutButton();
 homeExit.action = (data) => {
@@ -12,4 +12,5 @@ homeExit.action = (data) => {
     })
 }
 
+ApiConnector.current((response) => response.success ? ProfileWidget.showProfile(response.data) : {});
 
