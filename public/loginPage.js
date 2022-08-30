@@ -14,33 +14,17 @@ const errReg = document
     .getElementsByClassName(className)[0];
 errReg.element = errReg.textContent;
 
+userForm.loginFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errLog));
+userForm.registerFormCallback = (data) => ApiConnector.login(data, (response) => checkErr(response, errReg));
 
-userForm.loginFormCallback = (data) => {
-    ApiConnector.login(data, (response) => {
-        console.log(response);
-        if (response.success) {
-            errLog.style = "display: none;";
-            errLog.textContent = errLog.element;
-            location.reload();
-        } else {
-            // console.error(response.error);
-            errLog.style = "display: box;";
-            errLog.textContent = response.error;
-        }
-    });
-}
-
-userForm.registerFormCallback = (data) => {
-    ApiConnector.register(data, (response) => {
-        console.log(response);
-        if (response.success) {
-            errReg.style = "display: none;";
-            errReg.textContent = errReg.element;
-            location.reload();
-        } else {
-            // console.error(response.error);
-            errReg.style = "display: box;";
-            errReg.textContent = response.error;
-        }
-    });
+function checkErr (response, errDisplay) {
+    if (response.success) {
+        errDisplay.style = "display: none;";
+        errDisplay.textContent = errDisplay.element;
+        location.reload();
+    } else {
+        // console.error(response.error);
+        errDisplay.style = "display: box;";
+        errDisplay.textContent = response.error;
+    }
 }
