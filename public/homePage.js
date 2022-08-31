@@ -62,7 +62,7 @@ favoritesWidget.addUserCallback = (data) => ApiConnector.addUserToFavorites(data
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
     }
-    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+    favoritesWidget.setMessage(response.success, response.success ? 'Пользователь добавлен' : response.error);
 });
     // удаление пользователя из избранного:
 favoritesWidget.removeUserCallback = (data) => ApiConnector.removeUserFromFavorites(data, (response) => {
@@ -71,7 +71,7 @@ favoritesWidget.removeUserCallback = (data) => ApiConnector.removeUserFromFavori
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
     }
-    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+    favoritesWidget.setMessage(response.success, response.success ? 'Пользователь удален' : response.error);
 });
 
 
