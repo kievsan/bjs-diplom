@@ -8,6 +8,7 @@ ApiConnector.current((response) => {
         ProfileWidget.showProfile(response.data);
     }});
 
+
 // Получение текущих курсов валюты
 const exchangeRates = new RatesBoard();
 exchangeRates.renews = () => ApiConnector.getStocks((response) => {
@@ -17,6 +18,7 @@ exchangeRates.renews = () => ApiConnector.getStocks((response) => {
     }});
 exchangeRates.renews();
 exchangeRates.renewsIntervalID = setInterval( () => exchangeRates.renews(), 1000);
+
 
 // Операции с деньгами
 const moneyManager = new MoneyManager();
@@ -32,8 +34,21 @@ moneyManager.conversionMoneyCallback = (data) => ApiConnector.convertMoney(data,
     if (response.success) {
         ProfileWidget.showProfile(response.data);
     }
-    moneyManager.setMessage(response.success, response.success ? 'Счёт пополнен' : response.error);
+    moneyManager.setMessage(response.success, response.success ? 'Конвертация выполнена' : response.error);
 });
+    // перевод валюты:
+moneyManager.sendMoneyCallback = (data) => ApiConnector.transferMoney(data, (response) => {
+    if (response.success) {
+        ProfileWidget.showProfile(response.data);
+    }
+    moneyManager.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+});
+
+
+// Работа с избранным
+const favoritesWidget = new FavoritesWidget;
+    // начальный список избранного:
+
 
 
 // Выход из личного кабинета
