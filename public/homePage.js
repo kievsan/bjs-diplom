@@ -56,7 +56,9 @@ ApiConnector.getFavorites((response) => {
     }
     favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
 });
+    // добавление пользователя в список избранных:
 
+    // удаление пользователя из избранного:
 
 
 // Выход из личного кабинета
