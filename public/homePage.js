@@ -10,19 +10,18 @@ ApiConnector.current((response) => {
 
 // Получение текущих курсов валюты
 const exchangeRates = new RatesBoard();
-exchangeRates.intervalID = setInterval( () => {
-    ApiConnector.getStocks((response) => {
-        if (response.success) {
-            exchangeRates.clearTable();
-            exchangeRates.fillTable(response.data);
-        }});
-    exchangeRates.asyncDelay = 1000;
-    }, exchangeRates.asyncDelay);
+exchangeRates.renews = () => ApiConnector.getStocks((response) => {
+    if (response.success) {
+        exchangeRates.clearTable();
+        exchangeRates.fillTable(response.data);
+    }});
+exchangeRates.renews();
+exchangeRates.renewsIntervalID = setInterval( () => exchangeRates.renews(), 1000);
 
 // Выход из личного кабинета
 const homeExit = new LogoutButton();
 homeExit.action = (data) => ApiConnector.logout((response) => {
     if (response.success) {
-        clearInterval(exchangeRates.intervalID);
+        clearInterval(exchangeRates.renewsIntervalID);
         location.reload();
     }});
