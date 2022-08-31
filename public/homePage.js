@@ -18,6 +18,18 @@ exchangeRates.renews = () => ApiConnector.getStocks((response) => {
 exchangeRates.renews();
 exchangeRates.renewsIntervalID = setInterval( () => exchangeRates.renews(), 1000);
 
+// Операции с деньгами
+const moneyManager = new MoneyManager();
+    // пополнение баланса:
+moneyManager.addMoneyCallback = (data) => ApiConnector.addMoney(data, (response) => {
+    console.log(response);
+    if (response.success) {
+        ProfileWidget.showProfile(response.data);
+    }
+    moneyManager.setMessage(response.success,response.success ? 'Счёт пополнен' : response.error);
+});
+
+
 // Выход из личного кабинета
 const homeExit = new LogoutButton();
 homeExit.action = (data) => ApiConnector.logout((response) => {
