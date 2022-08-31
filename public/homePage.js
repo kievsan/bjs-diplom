@@ -54,10 +54,16 @@ ApiConnector.getFavorites((response) => {
         favoritesWidget.fillTable(response.data);
         moneyManager.updateUsersList(response.data);
     }
-    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
 });
     // добавление пользователя в список избранных:
-
+favoritesWidget.addUserCallback = (data) => ApiConnector.addUserToFavorites(data, (response) => {
+    if (response.success) {
+        favoritesWidget.clearTable();
+        favoritesWidget.fillTable(response.data);
+        moneyManager.updateUsersList(response.data);
+    }
+    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+});
     // удаление пользователя из избранного:
 
 
