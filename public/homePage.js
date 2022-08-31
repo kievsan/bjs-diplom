@@ -48,6 +48,14 @@ moneyManager.sendMoneyCallback = (data) => ApiConnector.transferMoney(data, (res
 // Работа с избранным
 const favoritesWidget = new FavoritesWidget;
     // начальный список избранного:
+ApiConnector.getFavorites((response) => {
+    if (response.success) {
+        favoritesWidget.clearTable();
+        favoritesWidget.fillTable(response.data);
+        moneyManager.updateUsersList(response.data);
+    }
+    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+});
 
 
 
