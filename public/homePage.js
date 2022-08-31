@@ -26,7 +26,7 @@ moneyManager.addMoneyCallback = (data) => ApiConnector.addMoney(data, (response)
     if (response.success) {
         ProfileWidget.showProfile(response.data);
     }
-    moneyManager.setMessage(response.success,response.success ? 'Счёт пополнен' : response.error);
+    moneyManager.setMessage(response.success, response.success ? 'Счёт пополнен' : response.error);
 });
 
 

@@ -67,9 +67,9 @@
       "password": "try",
       "id": 6,
       "balance": {
-        "RUB": 0,
-        "USD": 0,
-        "EUR": 0,
+        "RUB": 100,
+        "USD": 30,
+        "EUR": 20,
         "NTC": 0
       }
     },
