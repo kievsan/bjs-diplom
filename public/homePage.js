@@ -22,7 +22,13 @@ exchangeRates.renewsIntervalID = setInterval( () => exchangeRates.renews(), 1000
 const moneyManager = new MoneyManager();
     // пополнение баланса:
 moneyManager.addMoneyCallback = (data) => ApiConnector.addMoney(data, (response) => {
-    console.log(response);
+    if (response.success) {
+        ProfileWidget.showProfile(response.data);
+    }
+    moneyManager.setMessage(response.success, response.success ? 'Счёт пополнен' : response.error);
+});
+    // конвертирование валюты:
+moneyManager.conversionMoneyCallback = (data) => ApiConnector.convertMoney(data, (response) => {
     if (response.success) {
         ProfileWidget.showProfile(response.data);
     }
