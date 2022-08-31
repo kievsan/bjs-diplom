@@ -65,6 +65,14 @@ favoritesWidget.addUserCallback = (data) => ApiConnector.addUserToFavorites(data
     favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
 });
     // удаление пользователя из избранного:
+favoritesWidget.removeUserCallback = (data) => ApiConnector.removeUserFromFavorites(data, (response) => {
+    if (response.success) {
+        favoritesWidget.clearTable();
+        favoritesWidget.fillTable(response.data);
+        moneyManager.updateUsersList(response.data);
+    }
+    favoritesWidget.setMessage(response.success, response.success ? 'Перевод выполнен' : response.error);
+});
 
 
 // Выход из личного кабинета
